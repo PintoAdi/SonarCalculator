@@ -4,9 +4,13 @@
   <groupId>com</groupId>
   <artifactId>calculator</artifactId>
   <packaging>jar</packaging>
-  <version>1.0-SNAPSHOT</version>
+  <version>3.0-SNAPSHOT</version>
   <name>calculator</name>
   <url>http://maven.apache.org</url>
+  <properties>
+    <!-- Define the SonarQube Scanner Maven plugin version compatible with Java 8 and SonarQube 7.9.6 -->
+    <sonar.plugin.version>3.6.0.1398</sonar.plugin.version>
+  </properties>
   <dependencies>
     <dependency>
       <groupId>junit</groupId>
@@ -30,9 +34,13 @@
     <plugins>
         <plugin>
         <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-dependency-plugin</artifactId>
-        <version>2.5.1</version>
-        <executions>
+	<artifactId>maven-compiler-plugin</artifactId>
+	<version>3.8.1</version> <!-- Use a recent version of the plugin -->
+	<configuration>
+	  <source>1.8</source>
+	  <target>1.8</target>
+	</configuration>
+	<!--<executions>
           <execution>
             <id>copy-dependencies</id>
             <phase>package</phase>
@@ -43,7 +51,12 @@
               <outputDirectory>${project.build.directory}/lib/</outputDirectory>
             </configuration>
           </execution>
-        </executions>
+	</executions> -->
+    </plugin>
+      <plugin>
+        <groupId>org.sonarsource.scanner.maven</groupId>
+        <artifactId>sonar-maven-plugin</artifactId>
+        <version>3.3.0.603</version>
       </plugin>
         <plugin>
             <groupId>org.apache.maven.plugins</groupId>
